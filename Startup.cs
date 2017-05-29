@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
+using AspNetCoreOAuth2Sample.Services;
 
 namespace AspNetCoreOAuth2Sample
 {
@@ -43,6 +44,8 @@ namespace AspNetCoreOAuth2Sample
 
             // Add the Auth0 Settings object so it can be injected
             services.Configure<Auth0Settings>(Configuration.GetSection("Auth0"));
+
+            services.AddScoped<IApiService, ApiService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
