@@ -9,5 +9,9 @@ namespace AspNetCoreOAuth2Sample
         public string ClientId { get; set; }
 
         public string ClientSecret { get; set; }
+
+        public string ManagerApiClientId { get; set; }
+
+        public string ManagerApiClientSecret { get; set; }
     }
 }
