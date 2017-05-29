@@ -94,7 +94,7 @@ namespace AspNetCoreOAuth2Sample
                 SaveTokens = true,
 
                 // Set scope to openid. See https://auth0.com/docs/scopes
-                Scope = { "openid" },
+                Scope = { "openid", "read:users_app_metadata" },
                 
                 Events = new OAuthEvents
                 {
@@ -125,6 +125,16 @@ namespace AspNetCoreOAuth2Sample
                         if (!string.IsNullOrEmpty(email))
                         {
                             context.Identity.AddClaim(new Claim(ClaimsIdentity.DefaultNameClaimType, email, ClaimValueTypes.String, context.Options.ClaimsIssuer));
+                        }
+
+                        // Roles are added via rules, so you will need to create a rule that add roles to the user's app_metadata field see addRole.js in Rules folder
+                        var roles = user.Value<JArray>("roles");
+                        if (roles != null && roles.Count > 0)
+                        {
+                            foreach (var role in roles.Values<string>())
+                            {
+                                context.Identity.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, role, ClaimValueTypes.String, context.Options.ClaimsIssuer));
+                            }
                         }
                     },
                     OnTicketReceived = context =>
