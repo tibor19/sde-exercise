@@ -1,6 +1,90 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model  RulesViewModel
+
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Existing Rules";
+}
+
+<div class="row">
+    <div class="col-md-2">
+        <h3>App Name</h3>
+    </div>
+    <div class="col-md-2">
+        <h3>Rule Name</h3>
+    </div>
+    <div class="col-md-5">
+        <h3>Script</h3>
+    </div>
+    <div class="col-md-1">
+        <h3>Stage</h3>
+    </div>
+    <div class="col-md-1">
+        <h3>Enabled</h3>
+    </div>
+    <div class="col-md-1">
+        <h3>Order</h3>
+    </div>
+</div>
+
+@foreach (var client in Model.Clients)
+{
+
+    <div class="row">
+        <div class="col-md-2">
+            @client
+        </div>
+    </div>
+
+    @foreach (var rule in Model.Rules.Where(r => r.Name.Contains(client)))
+    {
+        <div class="row">
+            <div class="col-md-2">
+                &nbsp;
+            </div>
+            <div class="col-md-2">
+                @rule.Name
+            </div>
+            <div class="col-md-5">
+                <pre>@rule.Script</pre>
+            </div>
+            <div class="col-md-1">
+                @rule.Stage
+            </div>
+            <div class="col-md-1">
+                @rule.Enabled
+            </div>
+            <div class="col-md-1">
+                @rule.Order
+            </div>
+        </div>
+    }
+}
+
+<div class="row">
+    <div class="col-md-2">
+        No association
+    </div>
+</div>
+
+@foreach (var rule in Model.Rules.Where(r => Model.Clients.All(c => !r.Name.Contains(c))))
+{
+    <div class="row">
+        <div class="col-md-2">
+            &nbsp;
+        </div>
+        <div class="col-md-2">
+            @rule.Name
+        </div>
+        <div class="col-md-5">
+            <pre>@rule.Script</pre>
+        </div>
+        <div class="col-md-1">
+            @rule.Stage
+        </div>
+        <div class="col-md-1">
+            @rule.Enabled
+        </div>
+        <div class="col-md-1">
+            @rule.Order
+        </div>
+    </div>
 }

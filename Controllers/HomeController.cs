@@ -20,7 +20,13 @@ namespace AspNetCoreOAuth2Sample.Controllers
 
         public IActionResult Rules()
         {
-            return View();
+            var vm = new RulesViewModel()
+            {
+                Clients = await _apiService.GetAllClients(),
+                Rules = await _apiService.GetAllRules()
+            };
+
+            return View(vm);
         }
     }
 }
