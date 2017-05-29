@@ -17,5 +17,10 @@ namespace AspNetCoreOAuth2Sample.Controllers
         {
             return View();
         }
+
+        public IActionResult Rules()
+        {
+            return View();
+        }
     }
 }
