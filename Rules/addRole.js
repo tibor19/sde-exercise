@@ -1,11 +1,11 @@
 ﻿function (user, context, callback) {
-    if (context.clientID !== 'kYFLjeO1y8d1wCmzzJQwfwlWiBGB3EVB') {
+    if (context.clientID !== '{CLIENT_ID}') {
         return callback(null, user, context);
     }
     var adminRole = 'Admin';
     var userRole = 'User';
-    var adminUsers = ['tiberiu.covaci@gmail.com', 'tibi@covaci.se'];
-    var adminDomain = '@auth0.com';
+    var adminUsers = ['email1@somerandomdomain.io', 'email1@someotherrandomdomain.io'];
+    var adminDomain = '@somedomain.com';
     user.app_metadata = user.app_metadata || {};
 
     // You can add a Role based on what you want. Please note that the role names are case sensitive.
