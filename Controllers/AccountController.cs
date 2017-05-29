@@ -42,5 +42,11 @@ namespace AspNetCoreOAuth2Sample.Controllers
         {
             return View();
         }
+
+        public IActionResult AccessDenied(string returnUrl)
+        {
+            return Redirect("/");
+        }
+
     }
 }
